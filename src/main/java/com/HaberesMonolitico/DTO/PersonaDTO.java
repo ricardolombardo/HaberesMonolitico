@@ -7,6 +7,7 @@ public class PersonaDTO {
     private String apellidoMaterno;
     private Long departamentoId;
     private Long jerarquiaId;
+    private Long tituloId;
 
     // Getters y setters
     public Long getId() { return id; }
@@ -30,6 +31,11 @@ public class PersonaDTO {
 	public void setJerarquiaId(Long jerarquiaId) {
 		this.jerarquiaId = jerarquiaId;
 	}
-    
+	public Long getTituloId() {
+		return tituloId;
+	}
+	public void setTituloId(Long tituloId) {
+		this.tituloId = tituloId;
+	}
     
 }
