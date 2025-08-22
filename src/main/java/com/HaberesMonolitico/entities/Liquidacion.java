@@ -38,10 +38,15 @@ public class Liquidacion {
 	@JsonManagedReference
 	/*
 	 * Hibernate/JPA va a usar la columna ID_LIQUIDACION en la tabla TABULADO como foreign key.
-	 * @JsonManagedReference hace que al serializar Liquidacion, incluya la lista de Tabulado, pero que al serializar Tabulado, 
-	 * no vuelva a serializar Liquidacion.
+	 * @JsonManagedReference hace que al serializar Liquidacion, incluya la lista de Tabulado, pero que al serializar Tabulado, no vuelva a serializar Liquidacion.
+	 * CascadeType.ALL → las operaciones CRUD en Liquidacion afectan también a Tabulado/TareaLiquidacion.
+	 * Con orphanRemoval = true, el hijo eliminado de la lista se borra también de la base de datos.
 	 */
 	private List<Tabulado> tabulados;
+	
+	@OneToMany(mappedBy = "liquidacion", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	private List<TareaLiquidacion> tareasLiquidacion;
 
 	public Long getId() {
 		return id;
@@ -90,7 +95,13 @@ public class Liquidacion {
 	public void setLiquidada(Boolean liquidada) {
 		this.liquidada = liquidada;
 	}
-	
-	
+
+	public List<TareaLiquidacion> getTareasLiquidacion() {
+		return tareasLiquidacion;
+	}
+
+	public void setTareasLiquidacion(List<TareaLiquidacion> tareasLiquidacion) {
+		this.tareasLiquidacion = tareasLiquidacion;
+	}
 	
 }

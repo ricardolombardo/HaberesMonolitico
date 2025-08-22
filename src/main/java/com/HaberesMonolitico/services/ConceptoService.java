@@ -13,8 +13,8 @@ public class ConceptoService {
 	 @Autowired
 	 private ConceptoRepository conceptoRepository;
 	 
-	    public List<Concepto> listarConceptos() {
-	        return conceptoRepository.findAll();
-	    }
+	 public List<Concepto> listarConceptos() {
+		 return conceptoRepository.findAll();
+	 }
 
 }
