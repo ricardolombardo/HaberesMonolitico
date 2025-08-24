@@ -31,7 +31,6 @@ public class LiquidacionService {
 	    return liquidacionRepository.findByRangoAnioMes(anioDesde, mesDesde, anioHasta, mesHasta);
 	}
 
-	
 	public Optional<Liquidacion> obtenerLiquidacionPorId(Long id){
 		return liquidacionRepository.findById(id);
 	}
@@ -46,6 +45,10 @@ public class LiquidacionService {
     
     public void generarBasicos(Long idLiquidacion) {
     	liquidacionDAO.ejecutarSPGenerarBasico(idLiquidacion);
+    }
+    
+    public void generarTitulos(Long idLiquidacion) {
+    	liquidacionDAO.ejecutarSPGenerarTitulo(idLiquidacion);;
     }
 
 }

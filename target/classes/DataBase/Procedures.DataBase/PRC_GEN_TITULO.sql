@@ -11,7 +11,7 @@ BEGIN
     SET NOCOUNT ON;
 
     DECLARE @anio INT, @mes INT;
-    DECLARE @fechaInicioFin DATE;
+    DECLARE @fechaInicioLiquidacion DATE;
 
     -- Obtener año y mes desde la tabla Liquidacion
     SELECT @anio = L.ANIO, @mes = L.MES
@@ -19,12 +19,14 @@ BEGIN
     WHERE L.ID = @idLiquidacion;
 
     -- Calcular fecha
-    SET @fechaInicioFin = DATEFROMPARTS(@anio, @mes, 1);
+    SET @fechaInicioLiquidacion = DATEFROMPARTS(@anio, @mes, 1);
 
     -- Insertar en TabuladoConcepto
     INSERT INTO TABULADO_CONCEPTO (ID_TABULADO, ID_CONCEPTO, MONTO, SENTIDO)
     SELECT T.ID, 
-	C.ID, 
+		(SELECT ID 
+		FROM CONCEPTO 
+		WHERE CONCEPTO.CODIGO='D0002') ID_CONCEPTO, 
 	CASE 
 		WHEN TI.TIPO = 'INGENIERO' THEN J.MONTO*0.6
 		WHEN TI.TIPO = 'CONTADOR' THEN J.MONTO*0.5
@@ -41,9 +43,8 @@ BEGIN
     JOIN TABULADO T ON T.ID_NOU = NOU.ID
 	JOIN JERARQUIA J ON J.ID=P.ID_JERARQUIA
 	JOIN TITULO TI ON TI.ID=P.ID_TITULO
-	JOIN CONCEPTO C ON C.CODIGO='DO0002'
-    WHERE EN.FECHA_INICIO <= @fechaInicioFin
-      AND EN.FECHA_FIN > @fechaInicioFin
+    WHERE EN.FECHA_INICIO <= @fechaInicioLiquidacion
+      AND EN.FECHA_FIN > @fechaInicioLiquidacion
       AND T.ID_LIQUIDACION = @idLiquidacion
       AND E.IDENTIFICADOR = 'TITULO';
 END;

@@ -44,7 +44,6 @@ public class TareaLiquidacion {
         this.estadoEjecucion = estadoEjecucion;
     }
 
-    // ===== GETTERS & SETTERS =====
     public Integer getId() {
         return id;
     }
