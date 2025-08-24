@@ -23,6 +23,9 @@ public class Titulo {
 	
 	@Column(name="DESCRIPCION")
 	private String descripcion;
+	
+	@Column(name="TIPO")
+	private String tipo;
 
 	public Long getId() {
 		return id;
@@ -46,6 +49,14 @@ public class Titulo {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

@@ -25,4 +25,11 @@ public class LiquidacionDAO {
             .setParameter("idLiquidacion", idLiquidacion.intValue())
             .executeUpdate();
     }
+    
+    public void ejecutarSPGenerarTitulo(Long idLiquidacion) {
+        entityManager
+            .createNativeQuery("EXEC PRC_GEN_TITULO :idLiquidacion")
+            .setParameter("idLiquidacion", idLiquidacion.intValue())
+            .executeUpdate();
+    }
 }
