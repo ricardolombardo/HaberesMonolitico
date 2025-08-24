@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TAREAS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // una sola tabla para todas
+@DiscriminatorColumn(name = "TIPO", discriminatorType = DiscriminatorType.STRING) 
 public class Tarea {
 
     @Id
@@ -17,16 +19,6 @@ public class Tarea {
     @Column(name = "DESCRIPCION", columnDefinition = "NVARCHAR(MAX)")
     private String descripcion;
 
-    // ===== CONSTRUCTORES =====
-    public Tarea() {
-    }
-
-    public Tarea(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    // ===== GETTERS & SETTERS =====
     public Integer getId() {
         return id;
     }

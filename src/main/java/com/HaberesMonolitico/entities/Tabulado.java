@@ -36,11 +36,11 @@ public class Tabulado {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_LIQUIDACION")
-	@JsonBackReference
+	@JsonBackReference("liquidacion-tabulados")  //nombre único
 	private Liquidacion liquidacion;
 	
     @OneToMany(mappedBy = "tabulado", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("tabulado-conceptos")  //otro nombre único
     private List<TabuladoConcepto> tabuladoConceptos = new ArrayList<>();
 	
 

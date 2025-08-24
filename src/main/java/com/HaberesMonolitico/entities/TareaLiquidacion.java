@@ -20,12 +20,12 @@ public class TareaLiquidacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_TAREA", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("tarea-liquidaciones")
     private Tarea tarea;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_LIQUIDACION", nullable = false)
-    @JsonBackReference
+    @JsonBackReference("liquidacion-tareas")
     private Liquidacion liquidacion;
 
     @Column(name = "ORDEN", nullable = false)

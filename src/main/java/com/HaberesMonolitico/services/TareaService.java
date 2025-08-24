@@ -10,10 +10,10 @@ import com.HaberesMonolitico.repositories.TareaRepository;
 public class TareaService {
 	
 	@Autowired
-	 private TareaRepository tareaRepository;
+	private TareaRepository tareaRepository;
 	 
-	 public List<Tarea> listarTareas() {
-		 return tareaRepository.findAll();
-	 }
+	public List<Tarea> listarTareas() {
+		return tareaRepository.findAll();
+	}
 
 }

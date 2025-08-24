@@ -1,0 +1,22 @@
+<project name="HaberesMonolitico" default="maven-package-war" basedir=".">
+
+    <target name="backup-pom">
+        <copy file="pom.xml" tofile="pom-backup.xml" overwrite="true"/>
+    </target>
+
+    <target name="use-war-pom" depends="backup-pom">
+        <copy file="pom-war.xml" tofile="pom.xml" overwrite="true"/>
+    </target>
+
+    <target name="maven-package-war" depends="use-war-pom">
+        <exec executable="C:\Herramientas\apache-maven-3.9.11-bin\apache-maven-3.9.11\bin\mvn.cmd">
+            <arg value="clean"/>
+            <arg value="package"/>
+        </exec>
+    </target>
+
+    <target name="restore-pom" depends="maven-package-war">
+        <copy file="pom-backup.xml" tofile="pom.xml" overwrite="true"/>
+    </target>
+
+</project>

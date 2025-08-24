@@ -16,9 +16,9 @@ public class TareaController {
 	@Autowired
 	TareaService tareaService;
 	
-	 @GetMapping("/getAll")
-	 public List<Tarea> getAll(){
-		 return tareaService.listarTareas();
-	 }
+	@GetMapping("/getAll")
+	public List<Tarea> getAll(){
+		return tareaService.listarTareas();
+	}
 
 }
