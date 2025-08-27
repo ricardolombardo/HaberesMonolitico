@@ -1,7 +1,6 @@
 package com.HaberesMonolitico.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +17,7 @@ public class TareaLiquidacion {
     @Column(name = "ID")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_TAREA", nullable = false)
     @JsonBackReference("tarea-liquidaciones")
     private Tarea tarea;

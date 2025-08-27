@@ -1,5 +1,6 @@
 package com.HaberesMonolitico.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,28 +36,35 @@ public class TareaLiquidacionService {
 	}
 	
 	@Transactional
-	public List<TareaLiquidacion> actualizarTareasDeLiquidacionConDTO(List<TareaLiquidacionUpdateDTO> dtos, Long idLiquidacion) {
+	public List<TareaLiquidacion> actualizarTareasDeLiquidacionConDTO(
+	        List<TareaLiquidacionUpdateDTO> dtos, Long idLiquidacion) {
+
 	    Liquidacion liquidacion = liquidacionRepository.findById(idLiquidacion)
 	            .orElseThrow(() -> new RuntimeException("Liquidación no encontrada"));
 
-	    // Borrar las relaciones actuales
-	    List<TareaLiquidacion> actuales = tareaLiquidacionRepository.findByLiquidacionId(idLiquidacion);
-	    tareaLiquidacionRepository.deleteAll(actuales);
+	    List<TareaLiquidacion> result = new ArrayList<>();
 
-	    // Crear nuevas relaciones usando orden y estado que vienen del DTO
-	    List<TareaLiquidacion> nuevas = dtos.stream().map(dto -> {
+	    for (TareaLiquidacionUpdateDTO dto : dtos) {
 	        Tarea tarea = tareaRepository.findById(dto.getIdTarea())
 	                .orElseThrow(() -> new RuntimeException("Tarea no encontrada: " + dto.getIdTarea()));
-	        TareaLiquidacion tl = new TareaLiquidacion();
+
+	        // Buscar si ya existe la relación TareaLiquidacion para esta liquidacion y tarea
+	        TareaLiquidacion tl = tareaLiquidacionRepository
+	                .findByTareaIdAndLiquidacionId(dto.getIdTarea(), idLiquidacion)
+	                .orElse(new TareaLiquidacion());
+
 	        tl.setTarea(tarea);
 	        tl.setLiquidacion(liquidacion);
 	        tl.setOrden(dto.getOrden());
-	        tl.setEstadoEjecucion(dto.getEstadoEjecucion());
-	        return tl;
-	    }).toList();
+	        tl.setEstadoEjecucion(dto.getEstadoEjecucion() != null ? dto.getEstadoEjecucion() : "PENDIENTE");
 
-	    return tareaLiquidacionRepository.saveAll(nuevas);
+	        result.add(tareaLiquidacionRepository.save(tl));
+	    }
+
+	    return result;
 	}
+
+
 
 
 }

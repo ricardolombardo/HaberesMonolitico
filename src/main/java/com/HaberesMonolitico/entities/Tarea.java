@@ -1,5 +1,7 @@
 package com.HaberesMonolitico.entities;
 
+import java.util.Hashtable;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +21,9 @@ public class Tarea {
     @Column(name = "DESCRIPCION", columnDefinition = "NVARCHAR(MAX)")
     private String descripcion;
 
+    @Column(name = "TIPO", insertable = false, updatable = false)
+    private String tipo;
+    
     public Integer getId() {
         return id;
     }
@@ -41,5 +46,13 @@ public class Tarea {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    
+    public String getSP() {
+    	return null;
+    }
+    
+    public Hashtable<String, Object> getParametros(Long idLiquidacion){
+    	return null;
     }
 }
