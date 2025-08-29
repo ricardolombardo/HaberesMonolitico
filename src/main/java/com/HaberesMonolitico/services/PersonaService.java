@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.HaberesMonolitico.DTO.PersonaDTO;
 import com.HaberesMonolitico.entities.Jerarquia;
 import com.HaberesMonolitico.entities.Persona;
+import com.HaberesMonolitico.entities.Titulo;
 import com.HaberesMonolitico.repositories.PersonaRepository;
 
 @Service
@@ -21,6 +22,9 @@ public class PersonaService {
 	
 	@Autowired
 	private JerarquiaService jerarquiaService;
+	
+	@Autowired
+	private TituloService tituloService;
 	
 	public List<Persona> listarPersonas() {
         return personaRepository.findAll();
@@ -37,6 +41,23 @@ public class PersonaService {
     public Persona guardarPersona(Persona persona) {
         return personaRepository.save(persona);
     }
+    
+    public Persona guardarPersonaConDTO(PersonaDTO dto) {
+    	
+        Persona persona = new Persona();
+        persona.setNombre(dto.getNombre());
+        persona.setApellidoPaterno(dto.getApellidoPaterno());
+        persona.setApellidoMaterno(dto.getApellidoMaterno());
+        persona.setDepartamento(departamentoService.obtenerPorId(dto.getDepartamentoId()));
+        
+        Optional<Jerarquia> jerarquia=jerarquiaService.obtenerJerarquiaPorId(dto.getJerarquiaId());
+        persona.setJerarquia(jerarquia.get());
+        
+        Optional<Titulo> titulo=tituloService.obtenerTituloPorId(dto.getTituloId());
+        persona.setTitulo(titulo.get());
+    	
+        return personaRepository.save(persona);
+    }
 
     public void eliminarPersona(Long id) {
     	personaRepository.deleteById(id);
@@ -49,11 +70,13 @@ public class PersonaService {
             persona.setNombre(dto.getNombre());
             persona.setApellidoPaterno(dto.getApellidoPaterno());
             persona.setApellidoMaterno(dto.getApellidoMaterno());
-            
             persona.setDepartamento(departamentoService.obtenerPorId(dto.getDepartamentoId()));
-            Optional<Jerarquia> jerarquia=jerarquiaService.obtenerJerarquiaPorId(dto.getJerarquiaId());
             
+            Optional<Jerarquia> jerarquia=jerarquiaService.obtenerJerarquiaPorId(dto.getJerarquiaId());
             persona.setJerarquia(jerarquia.get());
+            
+            Optional<Titulo> titulo=tituloService.obtenerTituloPorId(dto.getTituloId());
+            persona.setTitulo(titulo.get());
             
             return personaRepository.save(persona);
         } else {

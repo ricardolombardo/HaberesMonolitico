@@ -3,7 +3,6 @@ package com.HaberesMonolitico.services;
 import com.HaberesMonolitico.entities.TareaLiquidacion;
 import com.HaberesMonolitico.DAO.GenericDAOExecutor;
 import com.HaberesMonolitico.entities.Tarea;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
@@ -33,7 +32,6 @@ public class EjecutorTarea {
         Tarea tarea = tareaLiquidacion.getTarea();
     	System.out.println("Clase real de tarea: " + tarea.getClass().getName());
     	Hashtable<String, Object> parametros=tarea.getParametros(idLiquidacion);
-        String sp=tarea.getSP();
         genericDAOExecutor.ejecutarSP(tarea.getSP(), parametros);
     }
 }

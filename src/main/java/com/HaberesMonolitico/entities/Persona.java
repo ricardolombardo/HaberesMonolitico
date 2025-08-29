@@ -32,6 +32,10 @@ public class Persona implements Serializable{
 	@JoinColumn(name = "ID_JERARQUIA")
 	private Jerarquia jerarquia;
 	
+	@ManyToOne
+	@JoinColumn(name = "ID_TITULO")
+	private Titulo titulo;
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,7 +83,13 @@ public class Persona implements Serializable{
 	public void setJerarquia(Jerarquia jerarquia) {
 		this.jerarquia = jerarquia;
 	}
-	
-	
+
+	public Titulo getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(Titulo titulo) {
+		this.titulo = titulo;
+	}
 	
 }

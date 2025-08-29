@@ -50,6 +50,11 @@ public class PersonaController {
     public Persona crearPersona(@RequestBody Persona persona) {
         return personaService.guardarPersona(persona);
     }
+    
+    @PostMapping("/{crearPersonaConDTO}")
+    public Persona crearPersonaConDTO(@RequestBody PersonaDTO persona) {
+        return personaService.guardarPersonaConDTO(persona);
+    }
 
     @DeleteMapping("/{id}")
     public void eliminarPersona(@PathVariable Long id) {
