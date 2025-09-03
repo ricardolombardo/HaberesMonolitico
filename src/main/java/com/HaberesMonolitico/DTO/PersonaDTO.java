@@ -8,6 +8,7 @@ public class PersonaDTO {
     private Long departamentoId;
     private Long jerarquiaId;
     private Long tituloId;
+    private int antiguedad;
 
     // Getters y setters
     public Long getId() { return id; }
@@ -25,17 +26,13 @@ public class PersonaDTO {
     public Long getDepartamentoId() { return departamentoId; }
     public void setDepartamentoId(Long departamentoId) { this.departamentoId = departamentoId; }
 	
-    public Long getJerarquiaId() {
-		return jerarquiaId;
-	}
-	public void setJerarquiaId(Long jerarquiaId) {
-		this.jerarquiaId = jerarquiaId;
-	}
-	public Long getTituloId() {
-		return tituloId;
-	}
-	public void setTituloId(Long tituloId) {
-		this.tituloId = tituloId;
-	}
+    public Long getJerarquiaId() {return jerarquiaId;}
+	public void setJerarquiaId(Long jerarquiaId) {this.jerarquiaId = jerarquiaId;}
+	
+	public Long getTituloId() {return tituloId;}
+	public void setTituloId(Long tituloId) {this.tituloId = tituloId;}
+	
+	public int getAntiguedad() {return antiguedad;}
+	public void setAntiguedad(int antiguedad) {this.antiguedad = antiguedad;}
     
 }

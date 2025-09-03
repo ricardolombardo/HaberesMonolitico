@@ -36,6 +36,9 @@ public class Persona implements Serializable{
 	@JoinColumn(name = "ID_TITULO")
 	private Titulo titulo;
 	
+	@Column(name="ANTIGUEDAD")
+	private int antiguedad;
+	
 	public Long getId() {
 		return id;
 	}
@@ -90,6 +93,14 @@ public class Persona implements Serializable{
 
 	public void setTitulo(Titulo titulo) {
 		this.titulo = titulo;
+	}
+
+	public int getAntiguedad() {
+		return antiguedad;
+	}
+
+	public void setAntiguedad(int antiguedad) {
+		this.antiguedad = antiguedad;
 	}
 	
 }

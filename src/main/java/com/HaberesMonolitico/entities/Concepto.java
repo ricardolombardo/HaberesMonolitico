@@ -20,6 +20,9 @@ public class Concepto {
 	@Column(name="CODIGO")
 	private String codigo;
 	
+	@Column(name="REMUNERATIVO")
+	private Boolean remunerativo;
+	
 	/*
     @OneToMany(mappedBy = "concepto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -58,6 +61,14 @@ public class Concepto {
 		this.codigo = codigo;
 	}
 
+	public Boolean getRemunerativo() {
+		return remunerativo;
+	}
+
+	public void setRemunerativo(Boolean remunerativo) {
+		this.remunerativo = remunerativo;
+	}
+	
 	/*
 	public List<TabuladoConcepto> getTabulados() {
 		return tabulados;
