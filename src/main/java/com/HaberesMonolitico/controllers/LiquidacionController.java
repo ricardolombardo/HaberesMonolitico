@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.HaberesMonolitico.entities.Liquidacion;
 import com.HaberesMonolitico.services.EjecutorTarea;
 import com.HaberesMonolitico.services.LiquidacionService;
-import com.HaberesMonolitico.services.TareaLiquidacionService;
 
 @RestController
 @RequestMapping("/liquidaciones")
@@ -20,9 +19,6 @@ public class LiquidacionController {
 	
 	@Autowired
 	private LiquidacionService liquidacionService;
-	
-	@Autowired
-	private TareaLiquidacionService tareaLiquidacionService;
 	
 	@Autowired
 	private EjecutorTarea ejecutorTarea;
@@ -62,10 +58,7 @@ public class LiquidacionController {
 	public void liquidar(@PathVariable("liquidacionId") Long liquidacionId) {
 		Optional<Liquidacion> liquidacion=liquidacionService.obtenerLiquidacionPorId(liquidacionId);
 		if(liquidacion.isPresent()) {
-			liquidacionService.generarTabulados(liquidacionId);
-			//liquidacionService.generarBasicos(liquidacionId);
-			//liquidacionService.generarTitulos(liquidacionId);
-			
+			liquidacionService.generarTabulados(liquidacionId);			
 			ejecutorTarea.ejecutarTareas(liquidacion.get().getTareasLiquidacion(),liquidacionId);
 			
 			liquidacion.get().setLiquidada(Boolean.TRUE);

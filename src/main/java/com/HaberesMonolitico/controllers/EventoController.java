@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.HaberesMonolitico.entities.Evento;
-import com.HaberesMonolitico.entities.Liquidacion;
 import com.HaberesMonolitico.services.EventoService;
 
 @RestController

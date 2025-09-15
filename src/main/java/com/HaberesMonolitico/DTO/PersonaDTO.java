@@ -9,6 +9,7 @@ public class PersonaDTO {
     private Long jerarquiaId;
     private Long tituloId;
     private int antiguedad;
+    private Boolean activo;
 
     // Getters y setters
     public Long getId() { return id; }
@@ -34,5 +35,8 @@ public class PersonaDTO {
 	
 	public int getAntiguedad() {return antiguedad;}
 	public void setAntiguedad(int antiguedad) {this.antiguedad = antiguedad;}
-    
+	
+	public Boolean getActivo() {return activo;}
+	public void setActivo(Boolean activo) {this.activo = activo;}
+	
 }

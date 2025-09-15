@@ -29,15 +29,18 @@ public class Persona implements Serializable{
 	private Departamento departamento;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_JERARQUIA")
+	@JoinColumn(name="ID_JERARQUIA")
 	private Jerarquia jerarquia;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_TITULO")
+	@JoinColumn(name="ID_TITULO")
 	private Titulo titulo;
 	
 	@Column(name="ANTIGUEDAD")
 	private int antiguedad;
+	
+	@Column(name="ACTIVO")
+	private Boolean activo;
 	
 	public Long getId() {
 		return id;
@@ -102,5 +105,16 @@ public class Persona implements Serializable{
 	public void setAntiguedad(int antiguedad) {
 		this.antiguedad = antiguedad;
 	}
-	
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
