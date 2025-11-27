@@ -30,6 +30,10 @@ public class LiquidacionService {
 	public List<Liquidacion> listarLiquidacionesPorRango(int anioDesde, int mesDesde, int anioHasta, int mesHasta) {
 	    return liquidacionRepository.findByRangoAnioMes(anioDesde, mesDesde, anioHasta, mesHasta);
 	}
+	
+	public List<Object[]> generarReporteLiquidaciones(Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta) {
+	    return liquidacionDAO.generarReporteLiquidaciones(anioDesde, mesDesde, anioHasta, mesHasta);
+	}
 
 	public Optional<Liquidacion> obtenerLiquidacionPorId(Long id){
 		return liquidacionRepository.findById(id);
