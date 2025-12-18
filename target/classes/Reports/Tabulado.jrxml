@@ -1,0 +1,105 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="Tabulado" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c709c7e-e568-4870-8027-bd0c94006308">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexionBaseHaberesMonolitico"/>
+	<parameter name="ID_LIQUIDACION" class="java.lang.Integer"/>
+	<parameter name="ID_PERSONA" class="java.lang.Integer"/>
+	<query language="SQL"><![CDATA[SELECT C."NOMBRE",
+	TC."SENTIDO",
+	TC."MONTO",
+	L."DESCRIPCION",
+	P."NOMBRE",
+	P."APELLIDO_PATERNO"
+FROM "TABULADO" T
+	JOIN "NOU" NOU ON 
+	 NOU."ID" = T."ID_NOU" 
+	JOIN "PERSONA" P ON 
+	 P."ID" = NOU."ID_PERSONA" 
+	JOIN "LIQUIDACION" L ON 
+	 L."ID" = T."ID_LIQUIDACION" 
+	JOIN "TABULADO_CONCEPTO" TC ON 
+	 TC."ID_TABULADO" = T."ID" 
+	JOIN "CONCEPTO" C ON 
+	 C."ID" = TC."ID_CONCEPTO" 
+WHERE 
+ 	L.ID = $P{ID_LIQUIDACION}
+  	AND P.ID = $P{ID_PERSONA}]]></query>
+	<field name="NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+	</field>
+	<field name="SENTIDO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SENTIDO"/>
+		<property name="com.jaspersoft.studio.field.label" value="SENTIDO"/>
+	</field>
+	<field name="MONTO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MONTO"/>
+		<property name="com.jaspersoft.studio.field.label" value="MONTO"/>
+	</field>
+	<field name="DESCRIPCION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DESCRIPCION"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPCION"/>
+	</field>
+	<field name="COLUMN_5" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+	</field>
+	<field name="APELLIDO_PATERNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="APELLIDO_PATERNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="APELLIDO_PATERNO"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="98" splitType="Stretch">
+		<element kind="staticText" uuid="5470c86d-f6be-48b8-b191-cdca66e13875" x="146" y="20" width="134" height="20" bold="true" hTextAlign="Left">
+			<text><![CDATA[Liquidacion:]]></text>
+		</element>
+		<element kind="textField" uuid="3e982072-d5b7-4af9-a810-bed5bbfcb3f3" x="280" y="20" width="128" height="19">
+			<expression><![CDATA[$F{DESCRIPCION}]]></expression>
+		</element>
+		<element kind="staticText" uuid="261209af-ffa5-448a-9688-55ce2c19f2b5" x="146" y="40" width="134" height="18" bold="true">
+			<text><![CDATA[Empleado]]></text>
+		</element>
+		<element kind="textField" uuid="4c367ea4-d90d-4e43-b120-ef8e067fb794" x="280" y="40" width="110" height="18">
+			<expression><![CDATA[$F{COLUMN_5}]]></expression>
+		</element>
+		<element kind="textField" uuid="82c43a1f-a734-4595-814d-dbc81ed8f6a6" x="390" y="40" width="150" height="18">
+			<expression><![CDATA[$F{APELLIDO_PATERNO}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="26" splitType="Stretch">
+		<element kind="staticText" uuid="1629339f-c599-4d42-93aa-0cb3292c2b22" x="90" y="3" width="50" height="21">
+			<text><![CDATA[NOMBRE]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f6799e3e-4418-45c6-825d-cf8c6b8a697a"/>
+		</element>
+		<element kind="staticText" uuid="a9716980-f4ea-4832-bb4b-68fbb40f4374" x="210" y="0" width="70" height="21" hTextAlign="Center">
+			<text><![CDATA[Debe]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fefee3a-c017-4b4c-b499-d115b0c6097d"/>
+		</element>
+		<element kind="staticText" uuid="fe948c7e-f1f9-4f30-a6d4-15ed64c1e374" x="340" y="0" width="70" height="21" hTextAlign="Center">
+			<text><![CDATA[Haber]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fefee3a-c017-4b4c-b499-d115b0c6097d"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="23">
+			<element kind="textField" uuid="382c3543-2ccf-467f-8b19-52eae3ee6a71" x="90" y="-2" width="86" height="20">
+				<expression><![CDATA[$F{NOMBRE}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f6799e3e-4418-45c6-825d-cf8c6b8a697a"/>
+			</element>
+			<element kind="textField" uuid="d065ebbc-9471-4179-a37c-4146433d0d75" x="205" y="1" width="80" height="20" hTextAlign="Center">
+				<printWhenExpression><![CDATA["D".equals($F{SENTIDO})]]></printWhenExpression>
+				<expression><![CDATA[$F{MONTO}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fefee3a-c017-4b4c-b499-d115b0c6097d"/>
+			</element>
+			<element kind="textField" uuid="ace533c3-dae3-4a80-9959-5de21bfe5436" x="340" y="0" width="80" height="20" hTextAlign="Center">
+				<printWhenExpression><![CDATA["A".equals($F{SENTIDO})]]></printWhenExpression>
+				<expression><![CDATA[$F{MONTO}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6fefee3a-c017-4b4c-b499-d115b0c6097d"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

@@ -55,6 +55,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+        
+        <!-- Dependencia para importar las librerias de Jasper -->
+        <dependency>
+    		<groupId>net.sf.jasperreports</groupId>
+    		<artifactId>jasperreports</artifactId>
+    		<version>7.0.3</version>
+		</dependency>
+		
+		
+		<!-- Dependencia para importar la generacion de PDF en Jasper -->
+		<dependency>
+    		<groupId>net.sf.jasperreports</groupId>
+    		<artifactId>jasperreports-pdf</artifactId>
+    		<version>7.0.3</version>
+		</dependency>
 
         <!-- JUnit para pruebas -->
         <dependency>

@@ -34,6 +34,10 @@ public class LiquidacionService {
 	public List<Object[]> generarReporteLiquidaciones(Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta) {
 	    return liquidacionDAO.generarReporteLiquidaciones(anioDesde, mesDesde, anioHasta, mesHasta);
 	}
+	
+	public List<Object[]> generarReporteDetalladoLiquidaciones(Integer anioDesde, Integer mesDesde, Integer anioHasta, Integer mesHasta) {
+	    return liquidacionDAO.generarReporteDetalladoLiquidaciones(anioDesde, mesDesde, anioHasta, mesHasta);
+	}
 
 	public Optional<Liquidacion> obtenerLiquidacionPorId(Long id){
 		return liquidacionRepository.findById(id);

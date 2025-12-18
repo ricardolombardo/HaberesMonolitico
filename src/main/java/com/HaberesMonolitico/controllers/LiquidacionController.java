@@ -93,7 +93,6 @@ public class LiquidacionController {
 	    respuesta.put("mensaje", "Reporte generado correctamente.");
 	    respuesta.put("cantidadRegistros", resultados.size());
 
-	    // convertir cada Object[] a un mapa con nombre de columna
 	    List<Map<String, Object>> detalle = new ArrayList<>();
 
 	    for (Object[] fila : resultados) {
@@ -102,8 +101,8 @@ public class LiquidacionController {
 	        item.put("descripcion", fila[1]);
 	        item.put("anio", fila[2]);
 	        item.put("mes", fila[3]);
-	        item.put("concepto", fila[4]);
-	        item.put("totalMonto", fila[5]);
+	        item.put("tabulados", fila[4]);
+	        item.put("monto", fila[5]);
 	        detalle.add(item);
 	    }
 
@@ -112,6 +111,47 @@ public class LiquidacionController {
 	    return respuesta;
 	}
 
+	
+	@GetMapping("/reporteDetallado/{anioDesde}/{mesDesde}/{anioHasta}/{mesHasta}")
+	public Map<String, Object> generarReporteDetalladoLiquidaciones(
+	        @PathVariable("anioDesde") int anioDesde,
+	        @PathVariable("mesDesde") int mesDesde,
+	        @PathVariable("anioHasta") int anioHasta,
+	        @PathVariable("mesHasta") int mesHasta) {
+
+	    List<Object[]> resultados = liquidacionService.generarReporteDetalladoLiquidaciones(
+	            anioDesde, mesDesde, anioHasta, mesHasta);
+
+	    Map<String, Object> respuesta = new HashMap<>();
+
+	    if (resultados.isEmpty()) {
+	        respuesta.put("mensaje", "No se encontraron liquidaciones en el rango.");
+	        respuesta.put("cantidadRegistros", 0);
+	        respuesta.put("detalle", Collections.emptyList());
+	        return respuesta;
+	    }
+
+	    respuesta.put("mensaje", "Reporte generado correctamente.");
+	    respuesta.put("cantidadRegistros", resultados.size());
+
+	    List<Map<String, Object>> detalle = new ArrayList<>();
+
+	    for (Object[] fila : resultados) {
+	        Map<String, Object> item = new HashMap<>();
+	        item.put("descripcion", fila[0]);
+	        item.put("anio", fila[1]);
+	        item.put("mes", fila[2]);
+	        item.put("HABER_MENSUAL", fila[3]);
+	        item.put("TITULO", fila[4]);
+	        item.put("ANTIGUEDAD", fila[5]);
+	        item.put("AJ", fila[6]);
+	        detalle.add(item);
+	    }
+
+	    respuesta.put("detalle", detalle);
+
+	    return respuesta;
+	}
 
 
 }
