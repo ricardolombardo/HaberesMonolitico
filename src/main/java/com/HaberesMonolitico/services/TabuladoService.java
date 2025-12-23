@@ -11,8 +11,10 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.HaberesMonolitico.entities.ExecutionConstant;
 import com.HaberesMonolitico.entities.Liquidacion;
 import com.HaberesMonolitico.entities.Tabulado;
+import com.HaberesMonolitico.repositories.ExecutionConstantRepository;
 import com.HaberesMonolitico.repositories.TabuladoRepository;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -26,6 +28,9 @@ public class TabuladoService {
 
 	@Autowired
 	private TabuladoRepository tabuladoRepository;
+	
+	@Autowired
+	private ExecutionConstantRepository executionConstantRepository;
 	
     @Autowired
     private DataSource dataSource;
@@ -70,8 +75,13 @@ public class TabuladoService {
 	public byte[] generarReciboPorTabulado(Long idTabulado) throws Exception{
 	    Tabulado tabulado = tabuladoRepository.findById(idTabulado)
 	            .orElseThrow(() -> new RuntimeException("Tabulado no encontrado"));
+	    
+	    ExecutionConstant reciboPathConst = executionConstantRepository
+	            .findByKey("RECIBO_PATH")
+	            .orElseThrow(() -> new RuntimeException("No existe la constante RECIBO_PATH"));
 
-	    InputStream jrxml = getClass().getResourceAsStream("/Reports/Tabulado.jrxml");
+	    //InputStream jrxml = getClass().getResourceAsStream("/Reports/Tabulado.jrxml");
+	    String jrxml = reciboPathConst.getValue();
 	    
 	    if (jrxml == null) {
 	        throw new RuntimeException("No se encontró el reporte Tabulado.jrxml");

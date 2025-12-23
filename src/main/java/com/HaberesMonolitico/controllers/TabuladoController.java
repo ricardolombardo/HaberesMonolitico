@@ -36,7 +36,7 @@ public class TabuladoController {
 	     return tabuladoService.findByLiquidacionId(idLiquidacion);
 	}
 	
-
+	//Controller para generar el PDF de un tabulado por liquidacion y persona
     @GetMapping("/recibo/{liq}/{per}")
     public ResponseEntity<byte[]> recibo(
     		@PathVariable("liq") Integer liq,
@@ -51,6 +51,7 @@ public class TabuladoController {
                 .body(pdf);
     }
     
+  //Controller para generar el PDF de un tabulado por tabulado
     @GetMapping("/recibo/tabulado/{idTabulado}")
     public ResponseEntity<byte[]> reciboPorTabulado(
             @PathVariable ("idTabulado") Long idTabulado) throws Exception {
