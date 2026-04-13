@@ -21,7 +21,15 @@ SELECT DESCRIPCION,ANIO,MES,SUM(HM)HABER_MENSUAL,SUM(TITULO) TITULO
 		CASE 
 			WHEN C.nombre = 'Titulo' THEN SUM(TC.monto)
 		ELSE 0
-		END 'TITULO'
+		END 'TITULO',
+		CASE 
+			WHEN C.nombre = 'Antiguedad' THEN SUM(TC.monto)
+		ELSE 0
+		END 'Antiguedad',
+		CASE 
+			WHEN C.nombre = 'Aporte jubilatorio' THEN SUM(TC.monto)
+		ELSE 0
+		END 'AJ'
 	FROM LIQUIDACION LIQ
 	JOIN Tabulado T ON T.ID_LIQUIDACION=LIQ.id
 	JOIN TABULADO_CONCEPTO TC ON TC.ID_TABULADO =T.id
